@@ -1,0 +1,116 @@
+﻿<Window x:Class="ModernVPN.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extesions="clr-namespace:ModernVPN.Core"
+        xmlns:model="clr-namespace:ModernVPN.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="CanResize"
+        >
+    <Window.DataContext>
+        <model:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel Background="#1E1E1E"
+               Margin="9">
+        <Border Height="28"
+                Background="#252525"
+                DockPanel.Dock="Top">
+            
+            <Border.InputBindings>
+                
+                <MouseBinding MouseAction="LeftClick"
+                              Command="{Binding MoveWindowsCommand}"/>
+            </Border.InputBindings>
+            
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,4,0">
+                    <Button Content="__"
+                            Command="{Binding MinimizeWindowsCommand}"
+                            Padding="0,0,0,2"/>
+                    <Button Content="☐"
+                            Command="{Binding MaximizeWindowsCommand }"
+                             Padding="0,0,0,2"/>
+                    <Button Content="✕" Command="{Binding ShutdownWindowsCommand}"
+                             Padding="0,0,0,2"/>
+                    
+
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Width="49"
+                HorizontalAlignment="Left"
+                Background="#252525">
+
+            <Border.Style>
+                <Style>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
+                                                         To="150"
+                                                         Duration="0:0:.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        
+                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
+                                  To="20"
+                                  Duration="0:0:.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel>
+                <RadioButton Content="VPN" 
+                             extesions:Extensions.Icon="&#128737;"
+                             Padding="7.6,3.5,8,0"
+                             FontSize="16"
+                             FontWeight="Normal"
+                             Foreground="LightGray"
+                             IsChecked="True"
+                             Command="{Binding ShowProtectionView}" Height="35" />
+                
+                <RadioButton Content="VPN" 
+                             FontSize="16"
+                             FontWeight="Normal"
+                             Foreground="LightGray"/>
+
+                <RadioButton Content="Setting"
+                             extesions:Extensions.Icon="⚙️"
+                             FontSize="16"
+                              Padding="6,1.5,4.7,0"
+                             FontWeight="Normal"
+                             Foreground="LightGray"
+                              Command="{Binding ShowSettingsView}" Height="33"/>
+
+            </StackPanel>
+        </Border>
+
+        <ContentPresenter Content="{Binding CurrentView}"/>
+    </DockPanel>
+</Window>

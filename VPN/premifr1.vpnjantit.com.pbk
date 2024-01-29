@@ -1,0 +1,6 @@
+[MyServer]
+MEDIA=rastapi
+Port=VPN2-0
+Devise=WAN Miniport (IKEv2)
+DEVISE=vpn 
+PhoneNumber=premifr1.vpnjantit.com
