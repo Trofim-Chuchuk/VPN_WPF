@@ -38,7 +38,7 @@ namespace ModernVPN.MVVM.ViewModel {
                 var process = new Process();
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                process.StartInfo.ArgumentList.Add($"/c rasdial MyServer vpnjantit.com 1 /phonebook:\"C:\\Users\\trofi\\OneDrive\\Рабочий стол\\впн\\ModernVPN\\VPN\\premifr1.vpnjantit.com.pbk\"");
+                process.StartInfo.ArgumentList.Add($"/c rasdial MyServer 123-vpnjantit.com 123 phonebook:\"./VPN/gr1.vpnjantit.com\"");
 
 
                 process.Start();
@@ -54,8 +54,8 @@ namespace ModernVPN.MVVM.ViewModel {
                         ConectionStatus = "не Подключено";
                         break;
                     default:
-                        Debug.WriteLine($"{process.ExitCode} не Все ок");
-                        ConectionStatus = $"{process.ExitCode} не Все ок";
+                        Debug.WriteLine($"ошибка NO {process.ExitCode} не Все ок");
+                        ConectionStatus = $"ошибка NO {process.ExitCode} ";
                         break;
                 }
 
@@ -64,7 +64,7 @@ namespace ModernVPN.MVVM.ViewModel {
         }
 
         private void ServerBuilder() {
-            var address = "premifr1.vpnjantit.com";
+            var address = "gr1.vpnjantit.com";
             var FolderPath = $"{Directory.GetCurrentDirectory()}/VPN";
 
             var PdkPath = $"{FolderPath}/{address}.pbk";
